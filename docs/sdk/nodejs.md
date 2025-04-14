@@ -22,10 +22,32 @@ async function startDeployment() {
     const yamlConfig = `
       application:
         name: My MERN App
-        environment: production
-        resources:
-          cpu: 1
-          memory: 2Gi
+        pods:
+        - name: mongo
+          image: my-username/my-mongo:v1.0.0
+          vars:
+            MONGO_INITDB_ROOT_USERNAME: mongo
+            MONGO_INITDB_ROOT_PASSWORD: passw0rd
+            MONGO_INITDB_DATABASE: todo
+          servicePorts:
+          - 27017
+          volumes:
+          - name: mongo-data-volume
+            size: 2Gi
+            mountPath: /data
+        - name: express
+          image: my-username/my-express:v1.0.0
+          vars:
+            MONGODB_URL: mongodb://mongo:passw0rd@mongo.pod:27017/
+          servicePorts:
+          - 3000
+        - name: react
+          path: /
+          tag: my-username/my-react:v1.0.0
+          vars:
+            EXPRESS_URL: http://express.pod:3000
+          servicePorts:
+          - 80
     `;
 
     const deployment = await client.startDeployment(yamlConfig);
@@ -81,7 +103,13 @@ Returns:
   sessionToken: string,
   applicationName: string,
   status: {
-    environment: string
+    environment: string,
+    pods: [
+      {
+        name: string,
+        status: 'running' | 'pending' | 'failed' | 'unknown'
+      }
+    ]
   },
   extend: {
     message: string,
@@ -249,10 +277,32 @@ const manager = new DeploymentManager();
 const config = `
   application:
     name: My MERN App
-    environment: production
-    resources:
-      cpu: 1
-      memory: 2Gi
+    pods:
+    - name: mongo
+      image: my-username/my-mongo:v1.0.0
+      vars:
+        MONGO_INITDB_ROOT_USERNAME: mongo
+        MONGO_INITDB_ROOT_PASSWORD: passw0rd
+        MONGO_INITDB_DATABASE: todo
+      servicePorts:
+      - 27017
+      volumes:
+      - name: mongo-data-volume
+        size: 2Gi
+        mountPath: /data
+    - name: express
+      image: my-username/my-express:v1.0.0
+      vars:
+        MONGODB_URL: mongodb://mongo:passw0rd@mongo.pod:27017/
+      servicePorts:
+      - 3000
+    - name: react
+      path: /
+      tag: my-username/my-react:v1.0.0
+      vars:
+        EXPRESS_URL: http://express.pod:3000
+      servicePorts:
+      - 80
 `;
 
 manager.deployApplication('My MERN App', config)
