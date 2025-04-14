@@ -91,10 +91,12 @@ curl -X POST "https://app.nexlayer.io/startUserDeployment" \
 # nexlayer.yaml
 application:
   name: My AI App
-  environment: production
-  resources:
-    cpu: 1
-    memory: 2Gi
+  pods:
+  - name: ai-app
+    image: "your-username/my-ai-app:v1.0.0"
+    path: "/"
+    servicePorts:
+      - 3000
 ```
 
 ```javascript
