@@ -2,6 +2,8 @@
 
 Welcome to the Nexlayer API Reference Documentation! This repository contains comprehensive documentation for the Nexlayer AI Cloud Platform API.
 
+Nexlayer is a product of AuditDeploy Inc., an applied research lab working on automating AI product deployment. We're building the deployer of the future—an AI agent that can take any codebase and turn it into a live, scalable product in seconds.
+
 ## Overview
 
 The Nexlayer API enables you to build and deploy AI-powered applications with ease. This documentation provides detailed information about:
@@ -53,8 +55,8 @@ All API requests require authentication using session tokens. You'll receive a s
 
 For support or security concerns, contact our team:
 
-- General Support: support@nexlayer.io
-- Security Issues: security@nexlayer.io
+- General Support: support@auditdeploy.com
+- Security Issues: security@auditdeploy.com
 - Documentation: https://docs.nexlayer.io
 
 ## License & Usage

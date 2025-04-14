@@ -1,6 +1,8 @@
 # 📘 License & Usage Terms
 
-This repository and its contents—including but not limited to the OpenAPI schema, Markdown documentation, and deployment examples—are the proprietary intellectual property of **Nexlayer Inc.**
+This repository and its contents—including but not limited to the OpenAPI schema, Markdown documentation, and deployment examples—are the proprietary intellectual property of **AuditDeploy Inc.**
+
+Nexlayer is a product of AuditDeploy Inc., an applied research lab working on automating AI product deployment. We're building the deployer of the future—an AI agent that can take any codebase and turn it into a live, scalable product in seconds.
 
 ---
 
@@ -24,6 +26,6 @@ You may **not**:
 
 ## 🛡️ Legal
 
-All rights are reserved by Nexlayer Inc. Unauthorized use or reproduction of this repository may result in legal action.
+All rights are reserved by AuditDeploy Inc. Unauthorized use or reproduction of this repository may result in legal action.
 
-For licensing inquiries or enterprise access, contact: **legal@nexlayer.com** 
+For licensing inquiries or enterprise access, contact: **legal@auditdeploy.com** 
