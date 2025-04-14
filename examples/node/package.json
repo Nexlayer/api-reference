@@ -1,0 +1,15 @@
+{
+  "name": "nexlayer-example",
+  "version": "1.0.0",
+  "description": "Example implementation of the Nexlayer API",
+  "main": "deployment.js",
+  "scripts": {
+    "start": "node deployment.js"
+  },
+  "dependencies": {
+    "@nexlayer/sdk": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+} 

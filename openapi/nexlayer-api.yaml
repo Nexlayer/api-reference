@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: Nexlayer API
+  description: |
+    API for the Nexlayer Application. For detailed information about the YAML configuration format and examples, please visit our [Nexlayer Deployment YAML repository](https://github.com/Nexlayer/nexlayer-deployment-yaml).
+  version: 1.0.0
+
+servers:
+  - url: https://app.nexlayer.io
+
+paths:
+  /extendDeployment:
+    post:
+      summary: Extend Deployment
+      description: Extend a deployment given a nexlayer token and namespace
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/extendDeploymentResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/extendDeploymentRequestBody'
+
+  /startUserDeployment:
+    post:
+      summary: Start User Deployment
+      description: |
+        This endpoint accepts a YAML file as input. For the complete YAML specification and examples, see our [deployment YAML guide](https://github.com/Nexlayer/nexlayer-deployment-yaml).
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/startUserDeploymentResponse'
+      requestBody:
+        required: true
+        content:
+          text/x-yaml:
+            schema:
+              $ref: '#/components/schemas/startUserDeploymentRequestBody'
+
+  /getPodsStatus:
+    post:
+      summary: Get Pods Status
+      description: Get pods status for a deployment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getPodsStatusResponse'
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getPodsStatusRequestBody'
+
+components:
+  schemas:
+    startUserDeploymentResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Deployment started successfully"
+        url:
+          type: string
+          example: "https://fantastic-fox-my-mern-app.alpha.nexlayer.ai"
+        sessionToken:
+          type: string
+          example: "<token>"
+        applicationName:
+          type: string
+          example: "My Mern App"
+        status:
+          type: object
+          properties:
+            environment:
+              type: string
+              example: "Production environment ready"
+      required:
+        - message
+        - url
+        - sessionToken
+        - applicationName
+        - status
+
+    extendDeploymentRequestBody:
+      type: object
+      properties:
+        applicationName:
+          type: string
+          example: "My MERN App"
+        sessionToken:
+          type: string
+          example: "<token-received-from-starting-a-deployment>"
+      required:
+        - applicationName
+        - sessionToken
+
+    extendDeploymentResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Application My MERN App has been extended. Environment will expire in 120 minutes. 2 extension(s) remaining."
+      required:
+        - message
+
+    getPodsStatusRequestBody:
+      type: object
+      properties:
+        sessionToken:
+          type: string
+          example: "<token-received-from-starting-a-deployment>"
+        applicationName:
+          type: string
+          example: "My Mern App"
+      required:
+        - sessionToken
+        - applicationName
+
+    getPodsStatusResponse:
+      type: object
+      properties:
+        pods:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "my-pod"
+              status:
+                type: string
+                example: "running"
+            required:
+              - name
+              - status
+      required:
+        - pods
+
+    startUserDeploymentRequestBody:
+      type: string
+      format: binary
+      description: "The uploaded file must be a valid YAML file." 
