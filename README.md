@@ -57,6 +57,10 @@ For support or security concerns, contact our team:
 - Security Issues: security@nexlayer.io
 - Documentation: https://docs.nexlayer.io
 
-## License
+## License & Usage
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details. 
+This API documentation is proprietary and protected by copyright.
+
+You may reference this documentation to build on the Nexlayer platform. Reuse, redistribution, or derivative work is not permitted.
+
+See [`NOTICE.md`](./NOTICE.md) for full usage terms. 
