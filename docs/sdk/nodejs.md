@@ -21,33 +21,13 @@ async function startDeployment() {
   try {
     const yamlConfig = `
       application:
-        name: My MERN App
+        name: My AI App
         pods:
-        - name: mongo
-          image: my-username/my-mongo:v1.0.0
-          vars:
-            MONGO_INITDB_ROOT_USERNAME: mongo
-            MONGO_INITDB_ROOT_PASSWORD: passw0rd
-            MONGO_INITDB_DATABASE: todo
-          servicePorts:
-          - 27017
-          volumes:
-          - name: mongo-data-volume
-            size: 2Gi
-            mountPath: /data
-        - name: express
-          image: my-username/my-express:v1.0.0
-          vars:
-            MONGODB_URL: mongodb://mongo:passw0rd@mongo.pod:27017/
+        - name: webapp
+          image: "your-username/my-app:v1.0.0"
+          path: "/"
           servicePorts:
           - 3000
-        - name: react
-          path: /
-          tag: my-username/my-react:v1.0.0
-          vars:
-            EXPRESS_URL: http://express.pod:3000
-          servicePorts:
-          - 80
     `;
 
     const deployment = await client.startDeployment(yamlConfig);
@@ -57,11 +37,11 @@ async function startDeployment() {
     const sessionToken = deployment.sessionToken;
     
     // Check pod status
-    const pods = await client.getPodsStatus('My MERN App');
+    const pods = await client.getPodsStatus('My AI App');
     console.log('Pod status:', pods);
     
     // Extend deployment if needed
-    const extension = await client.extendDeployment('My MERN App');
+    const extension = await client.extendDeployment('My AI App');
     console.log('Deployment extended:', extension.message);
   } catch (error) {
     console.error('Error:', error.message);
@@ -128,7 +108,7 @@ Returns:
 Gets the status of pods for a deployment.
 
 ```javascript
-const pods = await client.getPodsStatus('My MERN App');
+const pods = await client.getPodsStatus('My AI App');
 ```
 
 Parameters:
@@ -151,7 +131,7 @@ Returns:
 Extends the duration of a deployment.
 
 ```javascript
-const extension = await client.extendDeployment('My MERN App');
+const extension = await client.extendDeployment('My AI App');
 ```
 
 Parameters:
@@ -276,36 +256,16 @@ const manager = new DeploymentManager();
 
 const config = `
   application:
-    name: My MERN App
+    name: My AI App
     pods:
-    - name: mongo
-      image: my-username/my-mongo:v1.0.0
-      vars:
-        MONGO_INITDB_ROOT_USERNAME: mongo
-        MONGO_INITDB_ROOT_PASSWORD: passw0rd
-        MONGO_INITDB_DATABASE: todo
-      servicePorts:
-      - 27017
-      volumes:
-      - name: mongo-data-volume
-        size: 2Gi
-        mountPath: /data
-    - name: express
-      image: my-username/my-express:v1.0.0
-      vars:
-        MONGODB_URL: mongodb://mongo:passw0rd@mongo.pod:27017/
+    - name: webapp
+      image: "your-username/my-app:v1.0.0"
+      path: "/"
       servicePorts:
       - 3000
-    - name: react
-      path: /
-      tag: my-username/my-react:v1.0.0
-      vars:
-        EXPRESS_URL: http://express.pod:3000
-      servicePorts:
-      - 80
 `;
 
-manager.deployApplication('My MERN App', config)
+manager.deployApplication('My AI App', config)
   .then(deployment => console.log('Deployment successful:', deployment.url))
   .catch(error => console.error('Deployment failed:', error));
 ```
