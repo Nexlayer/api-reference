@@ -28,4 +28,4 @@ You may **not**:
 
 All rights are reserved by AuditDeploy Inc. Unauthorized use or reproduction of this repository may result in legal action.
 
-For licensing inquiries or enterprise access, contact: **legal@auditdeploy.com** 
+For licensing inquiries or enterprise access, contact: **legal@nexlayer.com** 

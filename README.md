@@ -55,8 +55,8 @@ All API requests require authentication using session tokens. You'll receive a s
 
 For support or security concerns, contact our team:
 
-- General Support: support@auditdeploy.com
-- Security Issues: security@auditdeploy.com
+- General Support: support@nexlayer.com
+- Security Issues: security@nexlayer.com
 - Documentation: https://docs.nexlayer.io
 
 ## License & Usage
