@@ -39,18 +39,6 @@ For detailed YAML configuration examples, visit our [Nexlayer Deployment YAML re
 
 All API requests require authentication using session tokens. You'll receive a session token when starting a deployment, which you'll use for subsequent requests. See our [Authentication Guide](docs/guides/authentication.md) for details.
 
-## Rate Limits
-
-- 100 requests per minute per token
-- 1000 requests per hour per token
-- Burst capacity of 200 requests
-
-## Available SDKs
-
-- Node.js: `@nexlayer/sdk`
-- Python: `nexlayer-python`
-- Go: `nexlayer-go`
-
 ## Support
 
 For support or security concerns, contact our team:
