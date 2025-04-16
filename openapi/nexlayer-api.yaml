@@ -31,11 +31,22 @@ paths:
             schema:
               $ref: '#/components/schemas/extendDeploymentRequestBody'
 
-  /startUserDeployment:
+  /startUserDeployment/{sessionToken}:
     post:
       summary: Start User Deployment
       description: |
-        This endpoint accepts a YAML file as input. For the complete YAML specification and examples, see our [deployment YAML guide](https://github.com/Nexlayer/nexlayer-deployment-yaml).
+        This endpoint accepts a YAML file as input. Example usage with curl:
+        ```bash
+        curl -X POST "https://app.nexlayer.io/startUserDeployment" \
+          -H "Content-Type: text/x-yaml" \
+          --data-binary @nexlayer.yaml
+        ```
+      parameters:
+        - name: sessionToken
+          in: path
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -49,6 +60,22 @@ paths:
           text/x-yaml:
             schema:
               $ref: '#/components/schemas/startUserDeploymentRequestBody'
+
+  /feedback:
+    post:
+      summary: Send Feedback
+      description: Send feedback to Nexlayer
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/feedback'
 
   /getPodsStatus:
     post:
@@ -92,13 +119,43 @@ components:
           properties:
             environment:
               type: string
-              example: "Production environment ready"
+              example: "<Notes about the environment>"
+        extend:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "<message-regarding-extending-deployment>"
+            extendURL:
+              type: string
+              example: "<curl-command-to-extend-deployment>"
+        claim:
+          type: object
+          properties:
+            message:
+              type: string
+              example: "<message-regarding-claiming-deployment>"
+            claimURL:
+              type: string
+              example: "<curl-command-to-claim-deployment>"
+        info:
+          type: string
+          example: "<additional-information>"
       required:
         - message
         - url
         - sessionToken
         - applicationName
         - status
+
+    feedback:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "Sample text"
+      required:
+        - text
 
     extendDeploymentRequestBody:
       type: object
@@ -108,7 +165,7 @@ components:
           example: "My MERN App"
         sessionToken:
           type: string
-          example: "<token-received-from-starting-a-deployment>"
+          example: "<token-recieved-from-starting-a-deployment>"
       required:
         - applicationName
         - sessionToken
@@ -127,7 +184,7 @@ components:
       properties:
         sessionToken:
           type: string
-          example: "<token-received-from-starting-a-deployment>"
+          example: "<token-recieved-from-starting-a-deployment>"
         applicationName:
           type: string
           example: "My Mern App"
