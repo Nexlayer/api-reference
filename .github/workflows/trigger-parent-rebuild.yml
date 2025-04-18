@@ -3,7 +3,7 @@ name: Trigger Parent Docs Rebuild
 on:
   push:
     branches:
-      - test-submodule-update
+      - test-secrets
 
 jobs:
   notify-parent:
