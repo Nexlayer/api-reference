@@ -24,7 +24,7 @@ curl -X POST "https://app.nexlayer.io/startUserDeployment" \
 ```
 
 ```javascript
-const { NexlayerClient } = require('@nexlayer/sdk');
+const { NexlayerClient } = require("@nexlayer/sdk");
 const client = new NexlayerClient();
 
 const deployment = await client.startDeployment(yamlConfig);
@@ -46,6 +46,7 @@ All API requests require authentication using session tokens. You'll receive a s
 For detailed information about configuring your application deployment, including examples for different application types and best practices, visit our [Nexlayer Deployment YAML repository](https://github.com/Nexlayer/nexlayer-deployment-yaml).
 
 The repository includes:
+
 - Complete YAML specification
 - Real-world examples
 - Best practices
@@ -57,6 +58,7 @@ The repository includes:
 > ⚡ **Rate Limit**: 100 requests per minute per session
 
 The API includes rate limit headers in all responses:
+
 ```json
 {
   "X-RateLimit-Limit": "100",
@@ -69,11 +71,11 @@ The API includes rate limit headers in all responses:
 
 ### Deployments
 
-Resource | Description
----------|------------
-[Start Deployment](#start-deployment) | Deploy your AI-powered application
-[Extend Deployment](#extend-deployment) | Extend your deployment duration
-[Get Pods Status](#get-pods-status) | Monitor your deployment status
+| Resource                                | Description                        |
+| --------------------------------------- | ---------------------------------- |
+| [Start Deployment](#start-deployment)   | Deploy your AI-powered application |
+| [Extend Deployment](#extend-deployment) | Extend your deployment duration    |
+| [Get Pods Status](#get-pods-status)     | Monitor your deployment status     |
 
 #### Start Deployment
 
@@ -92,11 +94,11 @@ curl -X POST "https://app.nexlayer.io/startUserDeployment" \
 application:
   name: My AI App
   pods:
-  - name: ai-app
-    image: "your-username/my-ai-app:v1.0.0"
-    path: "/"
-    servicePorts:
-      - 3000
+    - name: ai-app
+      image: "your-username/my-ai-app:v1.0.0"
+      path: "/"
+      servicePorts:
+        - 3000
 ```
 
 ```javascript
@@ -120,7 +122,7 @@ curl -X POST "https://app.nexlayer.io/extendDeployment" \
 ```
 
 ```javascript
-const extension = await client.extendDeployment('My AI App');
+const extension = await client.extendDeployment("My AI App");
 console.log(extension.message);
 ```
 
@@ -140,7 +142,7 @@ curl -X POST "https://app.nexlayer.io/getPodsStatus" \
 ```
 
 ```javascript
-const status = await client.getPodsStatus('My AI App');
+const status = await client.getPodsStatus("My AI App");
 console.log(status.pods);
 ```
 
@@ -157,29 +159,32 @@ console.log(status.pods);
 
 The API uses conventional HTTP response codes:
 
-Code | Description
------|------------
-200 | Success
-400 | Bad Request - Invalid parameters
-401 | Unauthorized - Invalid session token
-429 | Too Many Requests - Rate limit exceeded
-500 | Server Error - Please contact support
+| Code | Description                             |
+| ---- | --------------------------------------- |
+| 200  | Success                                 |
+| 400  | Bad Request - Invalid parameters        |
+| 401  | Unauthorized - Invalid session token    |
+| 429  | Too Many Requests - Rate limit exceeded |
+| 500  | Server Error - Please contact support   |
 
 ## Best Practices
 
 ### Security
+
 - Never share session tokens
 - Use HTTPS for all requests
 - Implement proper token rotation
 - Store tokens securely
 
 ### Performance
+
 - Cache responses when possible
 - Implement request throttling
 - Use exponential backoff for retries
 - Monitor resource usage
 
 ### Development
+
 - Test in staging environment first
 - Implement proper error handling
 - Follow our deployment guidelines
@@ -187,12 +192,12 @@ Code | Description
 
 ## SDKs and Tools
 
-Language | Package
----------|----------
-[Node.js](../sdk/nodejs.md) | `@nexlayer/sdk`
-[Python](../sdk/python.md) | `nexlayer-python`
-[Go](../sdk/go.md) | `nexlayer-go`
+| Language                    | Package           |
+| --------------------------- | ----------------- |
+| [Node.js](../sdk/nodejs.md) | `@nexlayer/sdk`   |
+| [Python](../sdk/python.md)  | `nexlayer-python` |
+| [Go](../sdk/go.md)          | `nexlayer-go`     |
 
 ## Need Help?
 
-[Contact us](mailto:support@nexlayer.com) (support@nexlayer.com) 
+[Contact us](mailto:support@nexlayer.com) (support@nexlayer.com)
