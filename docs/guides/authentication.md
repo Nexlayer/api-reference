@@ -41,31 +41,6 @@ curl -X GET "https://app.nexlayer.io/api/v1/deployments" \
   -H "Authorization: Bearer $NEXLAYER_SESSION_TOKEN"
 ```
 
-```javascript
-const { NexlayerClient } = require('@nexlayer/sdk');
-
-// Token loaded from secure environment variable
-const client = new NexlayerClient({
-  sessionToken: process.env.NEXLAYER_SESSION_TOKEN
-});
-
-// SDK handles authentication automatically
-const deployments = await client.listDeployments();
-```
-
-```python
-from nexlayer import NexlayerClient
-import os
-
-# Token loaded from secure environment variable
-client = NexlayerClient(
-    session_token=os.environ['NEXLAYER_SESSION_TOKEN']
-)
-
-# SDK handles authentication automatically
-deployments = client.list_deployments()
-```
-
 ## YAML Configuration
 
 For secure deployment configuration using YAML, refer to our [Nexlayer Deployment YAML repository](https://github.com/Nexlayer/nexlayer-deployment-yaml) for:

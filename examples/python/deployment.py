@@ -1,13 +1,7 @@
-from nexlayer import NexlayerClient
 import os
 
 def deploy_application():
     try:
-        # Initialize client with token from environment
-        client = NexlayerClient(
-            session_token=os.environ['NEXLAYER_SESSION_TOKEN']
-        )
-
         # Example YAML configuration
         yaml_config = """
 application:

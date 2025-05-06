@@ -116,5 +116,4 @@ curl -X POST "https://app.nexlayer.io/extendDeployment" \
 ## Next Steps
 
 - Explore the [full API reference](../api/README.md)
-- Check out our [SDK documentation](../sdk/README.md)
 - Visit our [GitHub repository](https://github.com/Nexlayer/api-reference) 

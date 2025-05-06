@@ -7,7 +7,6 @@
     "start": "node deployment.js"
   },
   "dependencies": {
-    "@nexlayer/sdk": "^1.0.0"
   },
   "engines": {
     "node": ">=14"

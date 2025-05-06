@@ -1,10 +1,4 @@
-const { NexlayerClient } = require('@nexlayer/sdk');
-
-// Initialize the client
-const client = new NexlayerClient({
-  // Load token from environment variable
-  sessionToken: process.env.NEXLAYER_SESSION_TOKEN
-});
+// All code referencing '@nexlayer/sdk' and NexlayerClient should be removed.
 
 async function deployApplication() {
   try {

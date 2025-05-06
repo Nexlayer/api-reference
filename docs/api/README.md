@@ -192,12 +192,6 @@ The API uses conventional HTTP response codes:
 
 ## SDKs and Tools
 
-| Language                    | Package           |
-| --------------------------- | ----------------- |
-| [Node.js](../sdk/nodejs.md) | `@nexlayer/sdk`   |
-| [Python](../sdk/python.md)  | `nexlayer-python` |
-| [Go](../sdk/go.md)          | `nexlayer-go`     |
-
 ## Need Help?
 
 [Contact us](mailto:support@nexlayer.com) (support@nexlayer.com)
