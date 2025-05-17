@@ -1,6 +1,6 @@
 # Nexlayer API Reference
 
-Welcome to the Nexlayer API! Build and deploy AI-powered applications with our simple yet powerful API.
+Welcome to the Nexlayer API! Deploy, Manage, and Scale AI-powered applications with our simple yet powerful API.
 
 > 🚀 **Quick Tip**: Get started in minutes by deploying your first AI application. Check out our [YAML deployment guide](https://github.com/Nexlayer/nexlayer-deployment-yaml) for detailed examples and best practices.
 
