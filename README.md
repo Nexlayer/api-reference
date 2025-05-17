@@ -675,7 +675,6 @@ If you need assistance with the Nexlayer API:
 - **Documentation**: [https://docs.nexlayer.com](https://docs.nexlayer.com)
 - **Email Support**: [support@nexlayer.com](mailto:support@nexlayer.com)
 - **Security Issues**: [security@nexlayer.com](mailto:security@nexlayer.com)
-- **Community Forum**: [https://community.nexlayer.com](https://community.nexlayer.com)
 - **Feedback & Issues**: [GitHub Issues](https://github.com/Nexlayer/api-reference/issues)
 
 ---
