@@ -672,10 +672,10 @@ curl -X POST "https://app.nexlayer.io/removeReservations" \
 
 If you need assistance with the Nexlayer API:
 
-- **Documentation**: [https://docs.nexlayer.io](https://docs.nexlayer.io)
-- **Email Support**: [support@nexlayer.io](mailto:support@nexlayer.io)
-- **Security Issues**: [security@nexlayer.io](mailto:security@nexlayer.io)
-- **Community Forum**: [https://community.nexlayer.io](https://community.nexlayer.io)
+- **Documentation**: [https://docs.nexlayer.com](https://docs.nexlayer.com)
+- **Email Support**: [support@nexlayer.com](mailto:support@nexlayer.com)
+- **Security Issues**: [security@nexlayer.com](mailto:security@nexlayer.com)
+- **Community Forum**: [https://community.nexlayer.com](https://community.nexlayer.com)
 
 ---
 
