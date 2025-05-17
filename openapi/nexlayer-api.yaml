@@ -1,45 +1,18 @@
 openapi: 3.0.0
 info:
   title: Nexlayer API
-  description: |
-    API for the Nexlayer Application. For detailed information about the YAML configuration format and examples, please visit our [Nexlayer Deployment YAML repository](https://github.com/Nexlayer/nexlayer-deployment-yaml).
+  description: API for the Nexlayer Application
   version: 1.0.0
-
 servers:
   - url: https://app.nexlayer.io
-
 paths:
-  /extendDeployment:
-    post:
-      summary: Extend Deployment
-      description: Extend a deployment given a nexlayer token and namespace
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/extendDeploymentResponse'
-        '400':
-          description: Bad Request
-        '500':
-          description: Internal Server Error
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/extendDeploymentRequestBody'
-
-  /startUserDeployment/{sessionToken}:
+  /startUserDeployment:
     post:
       summary: Start User Deployment
       description: |
         This endpoint accepts a YAML file as input. Example usage with curl:
-        ```bash
-        curl -X POST "https://app.nexlayer.io/startUserDeployment" \
-          -H "Content-Type: text/x-yaml" \
-          --data-binary @nexlayer.yaml
+        ```
+        curl -X POST "https://app.nexlayer.io/startUserDeployment" -H "Content-Type: text/x-yaml" --data-binary @nexlayer.yaml
         ```
       parameters:
         - name: sessionToken
@@ -60,7 +33,6 @@ paths:
           text/x-yaml:
             schema:
               $ref: '#/components/schemas/startUserDeploymentRequestBody'
-
   /feedback:
     post:
       summary: Send Feedback
@@ -76,18 +48,19 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/feedback'
-
-  /getPodsStatus:
+  /extendDeployment:
     post:
-      summary: Get Pods Status
-      description: Get pods status for a deployment
+      summary: Extend Deployment
+      description: Extend a deployment given a nexlayer session token and application name
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getPodsStatusResponse'
+                $ref: '#/components/schemas/extendDeploymentResponse'
+        '400':
+          description: Bad Request
         '500':
           description: Internal Server Error
       requestBody:
@@ -95,8 +68,142 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/getPodsStatusRequestBody'
-
+              $ref: '#/components/schemas/extendDeploymentRequestBody'
+  /claimDeployment:
+    post:
+      summary: Claim Deployment
+      description: Claim a deployment given a nexlayer session token and application name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/claimDeploymentResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/claimDeploymentRequestBody'
+  /addDeploymentReservation:
+    post:
+      summary: Add a Deployment Reservation
+      description: Add a deployment reservation given a nexlayer session token and application name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/addDeploymentReservationResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addDeploymentReservationRequestBody'
+  /removeDeploymentReservation:
+    post:
+      summary: Remove a Deployment Reservation
+      description: Remove a deployment reservation given a nexlayer session token and application name
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/removeDeploymentReservationResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/removeDeploymentReservationRequestBody'
+  /removeReservations:
+    post:
+      summary: Remove All Reservations
+      description: Remove all reservations given a nexlayer session token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/removeReservationsResponse'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/removeReservationsRequestBody'
+  /getReservations:
+    get:
+      summary: Get All Reservations
+      description: Get all reservations given a nexlayer session token
+      parameters:
+        - name: sessionToken
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getReservationsResponse'
+        '500':
+          description: Internal Server Error
+  /schema:
+    get:
+      summary: Get Schema
+      description: Get the nexlayer.yaml schema
+      responses:
+        '200':
+          description: Schema as JSON for nexlayer.yaml
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schemaResponse'
+  /validate:
+    post:
+      summary: Validate nexlayer.yaml file
+      description: Validate a nexlayer.yaml file contents
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/validateResponse'
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                application:
+                  example: any
 components:
   schemas:
     startUserDeploymentResponse:
@@ -104,94 +211,192 @@ components:
       properties:
         message:
           type: string
-          example: "Deployment started successfully"
+          example: Deployment started successfully
         url:
           type: string
-          example: "https://fantastic-fox-my-mern-app.alpha.nexlayer.ai"
+          example: https://fantastic-fox-my-mern-app.alpha.nexlayer.ai
         sessionToken:
           type: string
-          example: "<token>"
+          example: <token>
         applicationName:
           type: string
-          example: "My Mern App"
+          example: My Mern App
         status:
           type: object
           properties:
             environment:
               type: string
-              example: "<Notes about the environment>"
+              example: <Notes about the environment>
         extend:
           type: object
           properties:
             message:
               type: string
-              example: "<message-regarding-extending-deployment>"
+              example: <message-regarding-extending-deployment>
             extendURL:
               type: string
-              example: "<curl-command-to-extend-deployment>"
+              example: <curl-command-to-extend-deployment>
         claim:
           type: object
           properties:
             message:
               type: string
-              example: "<message-regarding-claiming-deployment>"
+              example: <message-regarding-claiming-deployment>
             claimURL:
               type: string
-              example: "<curl-command-to-claim-deployment>"
+              example: <curl-command-to-claim-deployment>
         info:
           type: string
-          example: "<additional-information>"
+          example: <additional-information>
       required:
         - message
         - url
         - sessionToken
         - applicationName
         - status
-
     feedback:
       type: object
       properties:
         text:
           type: string
-          example: "Sample text"
+          example: Sample text
       required:
         - text
-
     extendDeploymentRequestBody:
       type: object
       properties:
         applicationName:
           type: string
-          example: "My MERN App"
+          example: My MERN App
         sessionToken:
           type: string
-          example: "<token-recieved-from-starting-a-deployment>"
+          example: <token-recieved-from-starting-a-deployment>
       required:
         - applicationName
         - sessionToken
-
     extendDeploymentResponse:
       type: object
       properties:
         message:
           type: string
-          example: "Application My MERN App has been extended. Environment will expire in 120 minutes. 2 extension(s) remaining."
+          example: Application My MERN App has been extended.  Environment will expire in 120 minutes. 2 extension(s) remaining.
       required:
         - message
-
+    claimDeploymentTokenRequestBody:
+      type: object
+      properties:
+        applicationName:
+          type: string
+          example: My MERN App
+        sessionToken:
+          type: string
+          example: <token-recieved-from-starting-a-deployment>
+      required:
+        - applicationName
+        - sessionToken
+    claimDeploymentResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: You're almost there! Visit https://app.nexlayer.io/claim/<claim-token> to finalize your deployment.
+        claimURL:
+          type: string
+          example: https://app.nexlayer.io/claim/<claim-token>
+        claimToken:
+          type: string
+          example: <claim-token>
+      required:
+        - message
+        - claimURL
+        - claimToken
+    addDeploymentReservationRequestBody:
+      type: object
+      properties:
+        applicationName:
+          type: string
+          example: My MERN App
+        sessionToken:
+          type: string
+          example: <token-recieved-from-starting-a-deployment>
+      required:
+        - applicationName
+        - sessionToken
+    addDeploymentReservationResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Application My MERN App reservation has been added.
+      required:
+        - message
+    removeDeploymentReservationRequestBody:
+      type: object
+      properties:
+        applicationName:
+          type: string
+          example: My MERN App
+        sessionToken:
+          type: string
+          example: <token-recieved-from-starting-a-deployment>
+      required:
+        - applicationName
+        - sessionToken
+    removeDeploymentReservationResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Application My MERN App reservation has been removed.  Application site will be removed within the next 10 minutes.
+      required:
+        - message
+    removeReservationsRequestBody:
+      type: object
+      properties:
+        sessionToken:
+          type: string
+          example: <token-recieved-from-starting-a-deployment>
+      required:
+        - sessionToken
+    removeReservationsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: All reservations have been removed.  Application sites will be removed within the next 10 minutes.
+      required:
+        - message
+    getReservationsResponse:
+      type: object
+      properties:
+        reservedDeployments:
+          type: array
+          items:
+            type: object
+            properties:
+              applicationName:
+                type: string
+                example: My MERN App
+              url:
+                type: string
+                example: https://fantastic-fox-my-mern-app.alpha.nexlayer.ai
+            required:
+              - applicationName
+              - url
+      required:
+        - reservedDeployments
     getPodsStatusRequestBody:
       type: object
       properties:
         sessionToken:
           type: string
-          example: "<token-recieved-from-starting-a-deployment>"
+          example: <token-recieved-from-starting-a-deployment>
         applicationName:
           type: string
-          example: "My Mern App"
+          example: My Mern App
       required:
         - sessionToken
         - applicationName
-
     getPodsStatusResponse:
       type: object
       properties:
@@ -202,17 +407,27 @@ components:
             properties:
               name:
                 type: string
-                example: "my-pod"
+                example: my-pod
               status:
                 type: string
-                example: "running"
+                example: running
             required:
               - name
               - status
       required:
         - pods
-
+    schemaResponse:
+      type: object
+      properties: {}
+    validateResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Nexlayer YAML file is valid.
+      required:
+        - message
     startUserDeploymentRequestBody:
       type: string
       format: binary
-      description: "The uploaded file must be a valid YAML file." 
+      description: The uploaded file must be a valid YAML file. 
